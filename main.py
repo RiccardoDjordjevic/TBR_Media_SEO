@@ -1,8 +1,9 @@
+import argparse
+from pathlib import Path
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
-from pathlib import Path
 
 
 def load_keyword_data(file_path):
@@ -320,8 +321,13 @@ def get_recommendations(df_scored, topic_analysis=None):
 
 def main():
     """Main function to run the keyword analysis."""
+    parser = argparse.ArgumentParser(description="SEO keyword scoring and analysis pipeline.")
+    parser.add_argument("csv_file", nargs="?", default="keywords01.csv",
+                        help="Path to the keyword export CSV (default: keywords01.csv)")
+    args = parser.parse_args()
+
     # File path
-    file_path = 'keywords01.csv'
+    file_path = args.csv_file
 
     # Load and prepare data
     df = load_keyword_data(file_path)
